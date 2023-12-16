@@ -4,6 +4,7 @@ use std::fs;
 use std::io;
 
 use escposify::device::File;
+use escposify::img::Image;
 use escposify::printer::Printer;
 
 fn main() -> io::Result<()> {
@@ -20,13 +21,16 @@ fn main() -> io::Result<()> {
     // prepare the variable
     let mut printer = Printer::new(file, None, None);
 
+    let image = Image::new("railways.png").unwrap();
+
+    printer.bit_image(&image, Some("D24")).unwrap();
+
     printer
         .chain_font("C")?
         .chain_align("lt")?
         .chain_style("bu")?
         .chain_size(0, 0)?
         .chain_text("The quick brown fox jumps over the lazy dog")?
-        .chain_text("敏捷的棕色狐狸跳过懒狗")?
         .chain_barcode("12345678", "EAN8", "", "", 0, 0)?
         .chain_feed(1)?
         .chain_cut(false)?

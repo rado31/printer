@@ -11,7 +11,7 @@ fn main() -> io::Result<()> {
     // the IP is the your computer's IP address
     // "Receipt Printer" is the shared name of your printer
     // (check the control panel -> devices and printer)
-    let path = "usb://CUSTOM%20Engineering/VKP80?serial=VKP80%20200Num.:%200";
+    let path = "/dev/usb/lp0";
 
     // create a file and send it to the printer's path
     // if the path is not available/error you should handle it here.
@@ -32,4 +32,3 @@ fn main() -> io::Result<()> {
         .chain_cut(false)?
         .flush()
 }
-
